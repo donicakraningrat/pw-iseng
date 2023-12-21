@@ -18,7 +18,7 @@ const playwright = require('playwright');
 
   await page.goto("http://google.com/", { waitUntil: "networkidle" });
   const date = new Date();
-  await page.screenshot({ path: `${date}.png` });
+  await page.screenshot({ path: `img/${date}.png` });
 
   await page.close();
   await ctx.close();

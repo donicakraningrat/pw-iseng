@@ -1,11 +1,7 @@
-name: Playwright Tests
+name: Clock In
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
   schedule:
-    - cron: '0 6 * * 1-5'
+    - cron: '0 1 * * 1-5'
 jobs:
   test:
     timeout-minutes: 60
@@ -19,8 +15,8 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npm run test
+    - name: Run Playwright tests clock in
+      run: npx playwright test -g 'Clock In'
     - uses: actions/upload-artifact@v3
       if: always()
       with:

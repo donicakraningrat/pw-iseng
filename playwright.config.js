@@ -26,7 +26,7 @@ module.exports = defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    headless:false,
+    headless:true,
     geolocation: { longitude: 12.492507, latitude: 41.889938 },
     permissions: ['geolocation'],
     /* Base URL to use in actions like `await page.goto('/')`. */

@@ -11,7 +11,7 @@ test('Clock In', async ({ page }) => {
   await expect(page.locator("#tl-live-attendance-index > div > div.tl-header.hide-on-mobile > div > h1")).toHaveText("Live Attendance");
   await page.waitForLoadState("networkidle");
 
-  const rndInt = Math.floor(Math.random() * 4) + 1;
+  const rndInt = Math.floor(Math.random() * 20) + 1;
   console.log(rndInt);
   await sleep(rndInt * 60 * 1000);
   await page.getByRole('button', { name: 'Clock In' }).click();

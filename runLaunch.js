@@ -12,7 +12,7 @@
 const playwright = require('playwright');
 
 (async () => {
-  const browser = await playwright.chromium.launch({ headless: false });
+  const browser = await playwright.chromium.launch({ headless: true });
   const ctx = await browser.newContext();
   const page = await ctx.newPage();
 

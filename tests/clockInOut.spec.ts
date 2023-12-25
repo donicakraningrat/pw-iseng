@@ -11,11 +11,11 @@ test('Clock In', async ({ page }) => {
   await expect(page.locator("#tl-live-attendance-index > div > div.tl-header.hide-on-mobile > div > h1")).toHaveText("Live Attendance");
   await page.waitForLoadState("networkidle");
 
-  const rndInt = Math.floor(Math.random() * 20) + 1;
-  console.log(rndInt);
-  await sleep(rndInt * 60 * 1000);
+  // const rndInt = Math.floor(Math.random() * 20) + 1;
+  // console.log(rndInt);
+  // await sleep(rndInt * 60 * 1000);
   await page.getByRole('button', { name: 'Clock In' }).click();
-  // await page.screenshot();
+  await page.screenshot();
 });
 
 
@@ -33,6 +33,6 @@ test('Clock Out', async ({ page }) => {
   const rndInt = Math.floor(Math.random() * 20) + 1;
   await sleep(rndInt * 60 * 1000);
   await page.getByRole('button', { name: 'Clock Out' }).click();
-  // await page.screenshot();
+  await page.screenshot();
 });
 const sleep = (delay: number) => new Promise((resolve) => setTimeout(resolve, delay))

@@ -1,7 +1,7 @@
 name: Clock Out
 on:
   schedule:
-    - cron: '45 11 * * 1-5'
+    - cron: '10 11 * * 1-5'
 jobs:
   test:
     timeout-minutes: 60

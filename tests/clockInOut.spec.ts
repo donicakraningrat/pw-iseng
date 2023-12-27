@@ -13,7 +13,7 @@ test('Clock In', async ({ page },testInfo) => {
   
   await page.getByRole('button', { name: 'Clock In' }).click();
   await page.waitForLoadState("networkidle");
-  const screenshot = await page.screenshot();
+  const screenshot = await page.screenshot({fullPage:true});
   await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' });
 });
 
@@ -33,7 +33,7 @@ test('Clock Out', async ({ page },testInfo) => {
   await sleep(rndInt * 60 * 1000);
   await page.getByRole('button', { name: 'Clock Out' }).click();
   await page.waitForLoadState("networkidle");
-  const screenshot = await page.screenshot();
+  const screenshot = await page.screenshot({fullPage:true});
   await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' });
 });
 const sleep = (delay: number) => new Promise((resolve) => setTimeout(resolve, delay))

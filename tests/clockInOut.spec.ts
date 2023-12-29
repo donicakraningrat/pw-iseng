@@ -1,24 +1,44 @@
 import { test, expect } from '@playwright/test';
+test.use({
+  geolocation: { longitude: 106.84517200, latitude: -6.21154400 },
+  permissions: ['geolocation'],
+  storageState: 'auth.json'
+});
 
 test('Clock In', async ({ page },testInfo) => {
-  await page.goto('https://hr.talenta.co/live-attendance');
-  await page.getByLabel('Email').fill('doni.cakraningrat@prakerja.go.id');
-  await page.getByLabel('Password').fill('D1k@nt0r');
-  await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-  await page.waitForLoadState("networkidle");
+  // await page.goto('https://hr.talenta.co/live-attendance');
+  // await page.getByLabel('Email').fill('doni.cakraningrat@prakerja.go.id');
+  // await page.getByLabel('Password').fill('D1k@nt0r');
+  // await page.getByRole('button', { name: 'Sign in', exact: true }).click();
 
   await page.goto('https://hr.talenta.co/live-attendance');
-  await page.waitForLoadState("networkidle");
   
   await page.getByRole('button', { name: 'Clock In' }).click();
   //
-  expect(page.getByRole('paragraph', { name: 'Clock In' })).toBeVisible({timeout:3000});
-  expect(page.getByRole('button', { name: 'Detail' })).toBeVisible({timeout:3000});
+  expect(page.locator('li')
+  .filter({ has: page.locator('p').filter({ hasText: 'Clock In' }) })
+  .filter({ has: page.getByRole('button', { name: 'Detail' }) })).toBeVisible({timeout:3000});
   //
   const screenshot = await page.screenshot({fullPage:true});
   await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' });
 });
 
+test('Clock Out', async ({ page },testInfo) => {
+  await page.goto('https://hr.talenta.co/live-attendance');
+  
+  const rndInt = Math.floor(Math.random() * 20) + 1;
+  await sleep(rndInt * 60 * 1000);
+  await page.getByRole('button', { name: 'Clock Out' }).click();
+  //
+  expect(page.locator('li')
+  .filter({ has: page.locator('p').filter({ hasText: 'Clock Out' }) })
+  .filter({ has: page.getByRole('button', { name: 'Detail' }) })).toBeVisible({timeout:3000});
+  //
+  const screenshot = await page.screenshot({fullPage:true});
+  await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' });
+});
+
+/*
 test('Clock Out', async ({ page },testInfo) => {
   await page.goto('https://hr.talenta.co/live-attendance');
   await page.getByLabel('Email').fill('doni.cakraningrat@prakerja.go.id');
@@ -36,7 +56,7 @@ test('Clock Out', async ({ page },testInfo) => {
   const screenshot = await page.screenshot({fullPage:true});
   await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' });
 });
-
+*/
 // test('Clock Out', async ({ page },testInfo) => {
 //   await page.goto('https://account.mekari.com/users/sign_in');
 //   await expect(page).toHaveTitle(/Mekari Account/);

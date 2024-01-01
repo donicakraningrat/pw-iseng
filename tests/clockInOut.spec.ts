@@ -1,18 +1,16 @@
 import { test, expect } from '@playwright/test';
 test.use({
   geolocation: { longitude: 106.84517200, latitude: -6.21154400 },
-  permissions: ['geolocation'],
-  storageState: 'auth.json'
+  permissions: ['geolocation']
 });
 
 test('Clock In', async ({ page },testInfo) => {
-  // await page.goto('https://hr.talenta.co/live-attendance');
-  // await page.getByLabel('Email').fill('doni.cakraningrat@prakerja.go.id');
-  // await page.getByLabel('Password').fill('D1k@nt0r');
-  // await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+  await page.goto('https://hr.talenta.co/live-attendance');
+  await page.getByLabel('Email').fill('doni.cakraningrat@prakerja.go.id');
+  await page.getByLabel('Password').fill('D1k@nt0r');
+  await page.getByRole('button', { name: 'Sign in', exact: true }).click();
 
   await page.goto('https://hr.talenta.co/live-attendance');
-  
   await page.getByRole('button', { name: 'Clock In' }).click();
   //
   expect(page.locator('li')
@@ -25,9 +23,11 @@ test('Clock In', async ({ page },testInfo) => {
 
 test('Clock Out', async ({ page },testInfo) => {
   await page.goto('https://hr.talenta.co/live-attendance');
-  
-  const rndInt = Math.floor(Math.random() * 20) + 1;
-  await sleep(rndInt * 60 * 1000);
+  await page.getByLabel('Email').fill('doni.cakraningrat@prakerja.go.id');
+  await page.getByLabel('Password').fill('D1k@nt0r');
+  await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+
+  await page.goto('https://hr.talenta.co/live-attendance');
   await page.getByRole('button', { name: 'Clock Out' }).click();
   //
   expect(page.locator('li')
@@ -75,4 +75,4 @@ test('Clock Out', async ({ page },testInfo) => {
 //   const screenshot = await page.screenshot({fullPage:true});
 //   await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' });
 // });
-const sleep = (delay: number) => new Promise((resolve) => setTimeout(resolve, delay))
+// const sleep = (delay: number) => new Promise((resolve) => setTimeout(resolve, delay))

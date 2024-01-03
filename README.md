@@ -7,3 +7,6 @@ npx playwright codegen --geolocation="106.84517200,-6.21154400"
 ## run test
 Run Clock In:```npx playwright test -g 'Clock In'```
 Run Clock In:```npx playwright test -g 'Clock Out'```
+
+## result
+To open trace use this:```npx playwright show-trace test-results/clockInOut-Clock-In-chromium/trace.zip```

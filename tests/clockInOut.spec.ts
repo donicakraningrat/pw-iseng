@@ -12,10 +12,11 @@ test('Clock In', async ({ page },testInfo) => {
 
   await page.goto('https://hr.talenta.co/live-attendance');
   await page.getByRole('button', { name: 'Clock In' }).click();
+  await page.waitForLoadState("networkidle");
   //
   expect(page.locator('li')
   .filter({ has: page.locator('p').filter({ hasText: 'Clock In' }) })
-  .filter({ has: page.getByRole('button', { name: 'Detail' }) })).toBeVisible({timeout:3000});
+  .filter({ has: page.getByRole('button', { name: 'Detail' }) })).toBeVisible({timeout:30000});
   //
   const screenshot = await page.screenshot({fullPage:true});
   await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' });
@@ -29,10 +30,11 @@ test('Clock Out', async ({ page },testInfo) => {
 
   await page.goto('https://hr.talenta.co/live-attendance');
   await page.getByRole('button', { name: 'Clock Out' }).click();
+  await page.waitForLoadState("networkidle");
   //
   expect(page.locator('li')
   .filter({ has: page.locator('p').filter({ hasText: 'Clock Out' }) })
-  .filter({ has: page.getByRole('button', { name: 'Detail' }) })).toBeVisible({timeout:3000});
+  .filter({ has: page.getByRole('button', { name: 'Detail' }) })).toBeVisible({timeout:30000});
   //
   const screenshot = await page.screenshot({fullPage:true});
   await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' });
